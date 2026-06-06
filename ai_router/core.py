@@ -210,7 +210,7 @@ class AIRouter:
 
         provider_name, model_id, provider = self.config.resolve_model(model_name)
         base_url = self._get_provider_base_url(provider)
-        url = self._build_url(base_url, "/v1/chat/completions")
+        url = self._build_url(base_url, "/chat/completions")
 
         body = {
             "model": model_id,
