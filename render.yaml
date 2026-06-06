@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: ai-router
+    runtime: python
+    region: oregon
+    plan: free
+    buildCommand: pip install -r ai_router/requirements.txt
+    startCommand: uvicorn ai_router.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: CONFIG_PATH
+        value: ai_router/example_config.json
+      - key: KIMCHI_API_KEY
+        sync: false

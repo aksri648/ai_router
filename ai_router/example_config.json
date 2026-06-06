@@ -1,0 +1,60 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "model": "kimchi/minimax-m2.7",
+  "mode": {
+    "plan": {
+      "model": "kimchi/kimi-k2.6"
+    },
+    "build": {
+      "model": "kimchi/minimax-m2.7"
+    }
+  },
+  "provider": {
+    "kimchi": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "Kimchi",
+      "options": {
+        "baseURL": "https://llm.kimchi.dev/openai/v1",
+        "litellmProxy": true,
+        "apiKey": "$KIMCHI_API_KEY"
+      },
+      "models": {
+        "kimi-k2.6": {
+          "id": "kimi-k2.6",
+          "tool_call": true,
+          "reasoning": false,
+          "modalities": {
+            "input": ["text", "image"],
+            "output": ["text"]
+          },
+          "limit": {
+            "context": 262144,
+            "output": 32768
+          }
+        },
+        "kimi-k2.5": {
+          "id": "kimi-k2.5",
+          "tool_call": true,
+          "reasoning": false,
+          "modalities": {
+            "input": ["text", "image"],
+            "output": ["text"]
+          },
+          "limit": {
+            "context": 262144,
+            "output": 32768
+          }
+        },
+        "minimax-m2.7": {
+          "name": "minimax-m2.7",
+          "tool_call": true,
+          "reasoning": false,
+          "limit": {
+            "context": 196608,
+            "output": 32768
+          }
+        }
+      }
+    }
+  }
+}
