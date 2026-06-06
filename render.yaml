@@ -11,3 +11,14 @@ services:
         value: ai_router/example_config.json
       - key: KIMCHI_API_KEY
         sync: false
+
+  - type: web
+    name: ai-router-dashboard
+    runtime: python
+    region: oregon
+    plan: free
+    buildCommand: pip install -r ai_router/requirements.txt
+    startCommand: streamlit run ai_router/dashboard.py --server.port $PORT --server.headless true
+    envVars:
+      - key: ROUTER_URL
+        value: https://ai-router-yagv.onrender.com

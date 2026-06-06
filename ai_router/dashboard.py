@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import os
 import time
 from typing import Any
 
@@ -13,7 +14,8 @@ st.set_page_config(
     layout="wide",
 )
 
-API_BASE = st.sidebar.text_input("Router URL", value="http://localhost:8000")
+DEFAULT_API = os.environ.get("ROUTER_URL", "http://localhost:8000")
+API_BASE = st.sidebar.text_input("Router URL", value=DEFAULT_API)
 REFRESH_INTERVAL = st.sidebar.select_slider(
     "Auto-refresh (s)", options=[5, 10, 15, 30, 60], value=10
 )
