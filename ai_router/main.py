@@ -142,7 +142,23 @@ async def load_config(path: str):
         raise HTTPException(400, str(e))
 
 
-# ---- Proxy endpoint ----
+# ---- OpenAI-compatible endpoints ----
+
+@app.get("/v1/models")
+async def list_models():
+    if not router.config:
+        return {"object": "list", "data": []}
+    models = []
+    for provider_name, provider in router.config.provider.items():
+        for model_key, model_cfg in provider.models.items():
+            models.append({
+                "id": model_key,
+                "object": "model",
+                "created": 0,
+                "owned_by": provider_name,
+            })
+    return {"object": "list", "data": models}
+
 
 @app.post("/v1/chat/completions")
 async def chat_completions(body: ChatCompletionRequest, request: Request):
